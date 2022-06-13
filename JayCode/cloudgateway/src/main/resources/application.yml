@@ -1,0 +1,33 @@
+server:
+  port: 9191
+  
+  
+spring:
+  application:
+    name: CLOUD-GATEWAY
+    
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:9296
+    gateway:
+      routes:
+        - id: SERVICE-TWO-SERVICE
+          uri: lb://SERVICE-TWO-SERVICE
+          predicates:
+            - Path=/servicetwo/**
+            
+            
+        - id: SERVICE-ONE-SERVICE
+          uri: lb://SERVICE-ONE-SERVICE
+          predicates:
+            - Path=/serviceone/**
+#    
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka/
+#  instance:
+#    hostname: localhost
